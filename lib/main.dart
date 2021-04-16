@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 
@@ -5,6 +6,7 @@ import 'dart:math' as math;
 
 import 'package:flutter_app/dailer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 
 void main() {
   runApp(MyApp2());
@@ -197,7 +199,7 @@ class _MyApp2State extends State<MyApp2> {
           floatingActionButton: Padding(
             padding: const EdgeInsets.symmetric(vertical: 24.0),
             child: FloatingActionButton(
-              onPressed: () async=>_launchURL,
+              onPressed: () async=>_callNumber(),
               mini: false,
               backgroundColor: Colors.green,
               child: Icon(
@@ -209,9 +211,19 @@ class _MyApp2State extends State<MyApp2> {
       ),
     );
   }
-void _launchURL() async =>
-    await canLaunch(displayText) ? await launch(displayText) : throw 'Could not launch $displayText';
-  void handleButton(String number) {
+
+  
+
+_callNumber() async{
+  // var number = ; //set the number here
+  bool res = await FlutterPhoneDirectCaller.callNumber(displayText);
+}
+// void _launchURL() async{ 
+//   final url ='tel:$displayText';
+//   await launch(url).catchError((onError)=>log("error why it's not callimg --- $onError"));
+// }
+
+void handleButton(String number) {
     setState(() {
       if (number == "clear") {
         displayText = displayText.substring(0, displayText.length - 1);
